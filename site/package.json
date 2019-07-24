@@ -1,0 +1,27 @@
+{
+  "name": "site",
+  "version": "1.0.0",
+  "keywords": [
+    "gatsby",
+    "gatsby-theme",
+    "gatsby-plugin"
+  ],
+  "author": "Roberto Ruiz <rroberto.rruiz@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "clean": "gatsby clean"
+  },
+  "private": true,
+  "dependencies": {
+    "gatsby": "^2.13.38",
+    "gatsby-plugin-sharp": "^2.2.9",
+    "gatsby-source-filesystem": "^2.1.6",
+    "gatsby-theme-simple-shopify": "*",
+    "gatsby-transformer-sharp": "^2.2.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
