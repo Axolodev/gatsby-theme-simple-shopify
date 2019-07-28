@@ -10,7 +10,7 @@ const theme = {
     '3rem',
     '4rem',
   ],
-  lineHeights: [],
+  lineHeights: [1.58, 1.42, 1.313],
   colors: {
     lightPrimary: '#9575cd',
     primary: '#673ab7',
