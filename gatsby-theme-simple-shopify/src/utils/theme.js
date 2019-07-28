@@ -1,3 +1,12 @@
+const colors = {
+  lightPrimary: '#9575cd',
+  primary: '#5e35b1',
+  darkPrimary: '#311b92',
+  highlight: '#ff3d00',
+  darkHighlight: '#dd2c00',
+  black: '#333',
+};
+
 const theme = {
   breakpoints: ['40em', '52em', '64em'],
   fontSizes: [
@@ -11,13 +20,7 @@ const theme = {
     '4rem',
   ],
   lineHeights: [1.58, 1.42, 1.313],
-  colors: {
-    lightPrimary: '#9575cd',
-    primary: '#673ab7',
-    darkPrimary: '#512da8',
-    highlight: '#3d5afe',
-    black: '#333',
-  },
+  colors,
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   fonts: {
     sans: 'Tahoma, Geneva, sans-serif',
@@ -34,6 +37,26 @@ const theme = {
     },
     default: {
       fontfamily: 'sans',
+    },
+  },
+  buttons: {
+    default: {
+      transition: '300ms ease all',
+      backgroundColor: colors.primary,
+      borderRadius: 0,
+      fontWeight: 'bold',
+      '&:focus': {
+        backgroundColor: colors.darkPrimary,
+      },
+    },
+    highlight: {
+      fontWeight: 'bold',
+      borderRadius: 0,
+      transition: '300ms ease all',
+      backgroundColor: colors.highlight,
+      '&:focus': {
+        backgroundColor: colors.darkHighlight,
+      },
     },
   },
 };

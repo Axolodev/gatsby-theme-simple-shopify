@@ -57,18 +57,6 @@ function catalog(props) {
         {products.map(product => (
           <IndividualProduct key={product.id} product={product} />
         ))}
-        {products.map(product => (
-          <IndividualProduct key={product.id} product={product} />
-        ))}
-        {products.map(product => (
-          <IndividualProduct key={product.id} product={product} />
-        ))}
-        {products.map(product => (
-          <IndividualProduct key={product.id} product={product} />
-        ))}
-        {products.map(product => (
-          <IndividualProduct key={product.id} product={product} />
-        ))}
       </Flex>
     </Layout>
   );
