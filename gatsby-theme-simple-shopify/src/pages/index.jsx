@@ -53,7 +53,7 @@ function catalog(props) {
 
   return (
     <Layout>
-      <Flex flexWrap="wrap" px={2} mx="auto" style={{ maxWidth: 1300 }}>
+      <Flex flexWrap="wrap" px={2} pt={3} mx="auto" style={{ maxWidth: 1300 }}>
         {products.map(product => (
           <IndividualProduct key={product.id} product={product} />
         ))}

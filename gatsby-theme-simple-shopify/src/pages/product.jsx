@@ -9,6 +9,7 @@ import Layout from '../components/Layout';
 import formatPrice from '../utils/formatPrice';
 import ThemedText from '../components/ThemedText';
 import { mediaQueries } from '../utils/theme';
+import ProductCounter from '../components/ProductCounter';
 
 const DescriptionBox = styled(ThemedText)(({ theme }) => ({
   lineHeight: theme.lineHeights[1],
@@ -38,22 +39,6 @@ const DescriptionBox = styled(ThemedText)(({ theme }) => ({
 DescriptionBox.defaultProps = {
   as: ReactMarkdown,
 };
-
-function ProductCounter({ currentAmount, increaseAmount, decreaseAmount }) {
-  return (
-    <Flex bg="lightPrimary">
-      <Button onClick={decreaseAmount} variant="default" width={1 / 3} px={1}>
-        -
-      </Button>
-      <ThemedText textAlign="center" width={1 / 3} p={1} color="white">
-        {currentAmount}
-      </ThemedText>
-      <Button onClick={increaseAmount} variant="default" width={1 / 3} px={1}>
-        +
-      </Button>
-    </Flex>
-  );
-}
 
 const ThumbnailBox = styled(Box)(
   ({ theme, maxImageHeight, maxImageWidth, currentImageIndex, index }) => ({
@@ -101,7 +86,6 @@ function ProductGalleryThumbnails({
     >
       <ThumbnailFlex
         flexDirection={['row', null, 'column']}
-        px={2}
         width={[images.length * maxImageWidth, null, 1]}
         transformPx={calculateTransform()}
       >
@@ -184,12 +168,17 @@ function ProductPage({ data }) {
       <CurrentImageContextProvider>
         <Flex
           flexDirection={['column', null, 'row']}
-          pt={[3, null, 0]}
+          pt={3}
           px={2}
           mx="auto"
           style={{ maxWidth: 1300 }}
         >
-          <Box width={[1, null, 1 / 5]} py={2} order={[2, null, 1]}>
+          <Box
+            width={[1, null, 1 / 5]}
+            py={2}
+            px={[2, null, 0]}
+            order={[2, null, 1]}
+          >
             <ProductGalleryThumbnails images={images} />
           </Box>
           <Box
