@@ -1,5 +1,6 @@
 import React from 'react';
-import { Flex, Box } from 'rebass';
+import { Flex, Box, Button } from 'rebass';
+import VisuallyHidden from '@reach/visually-hidden';
 import { graphql } from 'gatsby';
 
 import Layout from '../components/Layout';
@@ -24,28 +25,66 @@ const IndividualCartProduct = ({ product }) => {
   const maxDisplayPrice = formatPrice(maxPrice);
 
   return (
-    <Flex width={1} py={2}>
-      <Box width={1 / 10}>
+    <Flex width={1} py={2} alignItems="center" style={{ position: 'relative' }}>
+      <Button
+        style={{
+          position: 'absolute',
+          right: 0,
+          top: 0,
+        }}
+        px={0}
+        py={0}
+        bg="white"
+        m={2}
+      >
+        <VisuallyHidden>Cerrar</VisuallyHidden>
+        <div aria-hidden style={{ width: 12, height: 12 }}>
+          <svg
+            viewBox="0 0 12 12"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="#333"
+            fill="#333"
+            style={{ width: 12, height: 12, display: 'block' }}
+          >
+            <path d="M0 0 L12 12" stroke-width="2" />
+            <path d="M12 0 L0 12" stroke-width="2" />
+          </svg>
+        </div>
+      </Button>
+
+      <Box width={120}>
         <GatsbyImage
           fluid={images['0'].localFile.childImageSharp.fluid}
-          style={{ maxWidth: 150 }}
+          style={{ maxWidth: 120 }}
         />
       </Box>
-      <Box pl={3} width={9 / 10}>
-        <ThemedText fontFamily="sans" lineHeight={1} fontSize={3} color="black">
+      <Flex
+        flexDirection="column"
+        pl={3}
+        width={[6 / 10, null, 8 / 10]}
+        style={{ height: 120 }}
+      >
+        <ThemedText as="h3" lineHeight={1} fontSize={[2, null, 3]}>
           {title}
         </ThemedText>
-        <ThemedText fontFamily="sans" pt={2} lineHeight={1} color="black">
-          Precio: {minDisplayPrice} {hasPriceRange && `- ${maxDisplayPrice}`}
-        </ThemedText>
-        <Box pt={4} width={1 / 8}>
-          <ProductCounter
-            currentAmount={0}
-            increaseAmount={() => {}}
-            decreaseAmount={() => {}}
-          />
-        </Box>
-      </Box>
+        <Flex
+          flexDirection={['row', 'column']}
+          justifyContent="space-between"
+          alignItems={['flex-end', 'initial']}
+          flex={1}
+        >
+          <ThemedText as="p" pt={2} fontSize={[1, 2]} lineHeight={1}>
+            Precio: {minDisplayPrice} {hasPriceRange && `- ${maxDisplayPrice}`}
+          </ThemedText>
+          <Box width={[1 / 3, 1 / 4, 1 / 6]}>
+            <ProductCounter
+              currentAmount={0}
+              increaseAmount={() => {}}
+              decreaseAmount={() => {}}
+            />
+          </Box>
+        </Flex>
+      </Flex>
     </Flex>
   );
 };
@@ -55,13 +94,30 @@ function CartPage({ data }) {
 
   return (
     <Layout>
-      <Box px={2} pt={3} mx="auto" style={{ maxWidth: 1300 }}>
+      <Box px={[3, 4]} py={3} mx="auto" style={{ maxWidth: 1300 }}>
         <ThemedText as="h1" fontSize={[3, 4, 5]}>
           Carrito
         </ThemedText>
-        {products.map(product => (
-          <IndividualCartProduct key={product.id} product={product} />
-        ))}
+        <Box mt={2}>
+          {products.map(product => (
+            <IndividualCartProduct key={product.id} product={product} />
+          ))}
+        </Box>
+        <Box mt={3}>
+          <Box style={{ height: 1 }} bg="black" my={2} />
+          <Flex width={1}>
+            <ThemedText fontSize={3} flex={1}>
+              Subtotal:
+            </ThemedText>
+            <ThemedText>$0.00</ThemedText>
+          </Flex>
+          <Box style={{ height: 1 }} bg="black" my={2} />
+        </Box>
+        <Flex width={1} justifyContent="flex-end">
+          <Button mt={3} variant="highlight" px={4} py={3}>
+            Checkout
+          </Button>
+        </Flex>
       </Box>
     </Layout>
   );

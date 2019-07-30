@@ -46,7 +46,7 @@ const ThumbnailBox = styled(Box)(
     maxHeight: maxImageHeight,
     transition: '0.5s ease all',
     border: `4px solid ${
-      currentImageIndex !== index ? 'transparent' : theme.colors.highlight
+      currentImageIndex !== index ? 'transparent' : theme.colors.primary
     }`,
   })
 );
@@ -169,7 +169,7 @@ function ProductPage({ data }) {
         <Flex
           flexDirection={['column', null, 'row']}
           pt={3}
-          px={2}
+          px={4}
           mx="auto"
           style={{ maxWidth: 1300 }}
         >

@@ -23,7 +23,7 @@ const IndividualProduct = ({ product }) => {
 
   return (
     <Box
-      px={3}
+      px={4}
       py={2}
       width={[1 / 2, 1 / 3, 1 / 4, 1 / 5]}
       as={GatsbyLink}
