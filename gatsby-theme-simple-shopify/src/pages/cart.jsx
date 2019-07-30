@@ -55,16 +55,17 @@ const IndividualCartProduct = ({ product }) => {
       <Box width={120}>
         <GatsbyImage
           fluid={images['0'].localFile.childImageSharp.fluid}
+          alt={images['0'].altText}
           style={{ maxWidth: 120 }}
         />
       </Box>
       <Flex
         flexDirection="column"
         pl={3}
-        width={[6 / 10, null, 8 / 10]}
+        width={8 / 10}
         style={{ height: 120 }}
       >
-        <ThemedText as="h3" lineHeight={1} fontSize={[2, null, 3]}>
+        <ThemedText width={0.9} as="h3" lineHeight={1} fontSize={[2, null, 3]}>
           {title}
         </ThemedText>
         <Flex
@@ -73,7 +74,13 @@ const IndividualCartProduct = ({ product }) => {
           alignItems={['flex-end', 'initial']}
           flex={1}
         >
-          <ThemedText as="p" pt={2} fontSize={[1, 2]} lineHeight={1}>
+          <ThemedText
+            as="p"
+            pt={2}
+            fontSize={[2]}
+            lineHeight={1}
+            style={{ opacity: 0.6 }}
+          >
             Precio: {minDisplayPrice} {hasPriceRange && `- ${maxDisplayPrice}`}
           </ThemedText>
           <Box width={[1 / 3, 1 / 4, 1 / 6]}>
@@ -104,14 +111,14 @@ function CartPage({ data }) {
           ))}
         </Box>
         <Box mt={3}>
-          <Box style={{ height: 1 }} bg="black" my={2} />
+          <Box style={{ height: 1, opacity: 0.5 }} bg="black" my={2} />
           <Flex width={1}>
             <ThemedText fontSize={3} flex={1}>
               Subtotal:
             </ThemedText>
             <ThemedText>$0.00</ThemedText>
           </Flex>
-          <Box style={{ height: 1 }} bg="black" my={2} />
+          <Box style={{ height: 1, opacity: 0.5 }} bg="black" my={2} />
         </Box>
         <Flex width={1} justifyContent="flex-end">
           <Button mt={3} variant="highlight" px={4} py={3}>
@@ -142,6 +149,7 @@ export const pageQuery = graphql`
           }
         }
         images {
+          altText
           localFile {
             childImageSharp {
               fluid(maxWidth: 200) {

@@ -45,6 +45,7 @@ const ThumbnailBox = styled(Box)(
     maxWidth: maxImageWidth,
     maxHeight: maxImageHeight,
     transition: '0.5s ease all',
+    cursor: 'pointer',
     border: `4px solid ${
       currentImageIndex !== index ? 'transparent' : theme.colors.primary
     }`,
@@ -82,6 +83,7 @@ function ProductGalleryThumbnails({
   return (
     <Box
       width={1}
+      aria-hidden
       style={{ maxHeight: maxContainerHeight, overflow: 'hidden' }}
     >
       <ThumbnailFlex
@@ -112,10 +114,12 @@ function ProductGalleryThumbnails({
 
 function ProductGalleryMainImage({ images }) {
   const { currentImageIndex } = useCurrentImageContext();
+  const currentImage = images[currentImageIndex];
 
   return (
     <GatsbyImage
-      fluid={images[currentImageIndex].localFile.childImageSharp.main}
+      fluid={currentImage.localFile.childImageSharp.main}
+      alt={currentImage.altText}
       style={{ maxWidth: 800 }}
       data-product-image
     />
@@ -242,6 +246,7 @@ export const productQuery = graphql`
       descriptionHtml
       images {
         id
+        altText
         localFile {
           childImageSharp {
             main: fluid(maxWidth: 800) {

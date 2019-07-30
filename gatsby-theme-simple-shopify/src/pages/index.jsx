@@ -30,18 +30,22 @@ const IndividualProduct = ({ product }) => {
       to="/product"
       style={{ textDecoration: 'none ' }}
     >
-      <Image fluid={images['0'].localFile.childImageSharp.fluid} />
+      <Image
+        alt={images['0'].altText}
+        fluid={images['0'].localFile.childImageSharp.fluid}
+      />
       <Text
         fontFamily="sans"
         lineHeight={1}
         fontSize={2}
         fontWeight="bold"
+        as="h3"
         py={1}
         color="black"
       >
         {title}
       </Text>
-      <Text fontFamily="sans" lineHeight={1} color="black">
+      <Text fontFamily="sans" lineHeight={1} color="black" as="p">
         Precio: {minDisplayPrice} {hasPriceRange && `- ${maxDisplayPrice}`}
       </Text>
     </Box>
@@ -81,6 +85,7 @@ export const catalogQuery = graphql`
           }
         }
         images {
+          altText
           localFile {
             childImageSharp {
               fluid(maxWidth: 320) {
