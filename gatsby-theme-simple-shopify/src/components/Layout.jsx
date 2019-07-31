@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import theme from '../utils/theme';
+import theme from '../config/theme';
 import './reset.css';
 import { ShopifyClientProvider } from './context/ShopifyContext';
 

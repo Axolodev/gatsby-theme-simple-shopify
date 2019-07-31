@@ -2,8 +2,8 @@ import React from 'react';
 import { Flex, Box, Text } from 'rebass';
 import Image from 'gatsby-image';
 import { graphql } from 'gatsby';
-import Layout from '../components/Layout';
-import formatPrice from '../utils/formatPrice';
+import Layout from '../../components/Layout';
+import formatPrice from '../../utils/formatPrice';
 import GatsbyLink from 'gatsby-link';
 
 const IndividualProduct = ({ product }) => {
@@ -27,7 +27,7 @@ const IndividualProduct = ({ product }) => {
       py={2}
       width={[1 / 2, 1 / 3, 1 / 4, 1 / 5]}
       as={GatsbyLink}
-      to="/product"
+      to={`/product/${handle}`}
       style={{ textDecoration: 'none ' }}
     >
       <Image
@@ -74,6 +74,7 @@ export const catalogQuery = graphql`
       nodes {
         id
         title
+        handle
         priceRange {
           minVariantPrice {
             amount

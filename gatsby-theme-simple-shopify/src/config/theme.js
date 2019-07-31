@@ -7,8 +7,13 @@ const colors = {
   black: '#333',
 };
 
+const breakpoints = ['40em', '52em', '64em'];
+
 const theme = {
-  breakpoints: ['40em', '52em', '64em'],
+  breakpoints,
+  mediaQueries: breakpoints.map(
+    bp => `@media only screen and (min-width: ${bp})`
+  ),
   fontSizes: [
     '0.75rem',
     '0.875rem',
@@ -61,8 +66,4 @@ const theme = {
   },
 };
 
-const mediaQueries = theme.breakpoints.map(
-  bp => `@media only screen and (min-width: ${bp})`
-);
-
-export { theme as default, mediaQueries };
+export default theme;

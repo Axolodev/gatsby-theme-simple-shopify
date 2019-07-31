@@ -3,11 +3,11 @@ import { Flex, Box, Button, Image } from 'rebass';
 import VisuallyHidden from '@reach/visually-hidden';
 import styled from 'styled-components';
 
-import Layout from '../components/Layout';
-import ThemedText from '../components/ThemedText';
-import formatPrice from '../utils/formatPrice';
-import ProductCounter from '../components/ProductCounter';
-import { useShopifyFunctions } from '../components/context/ShopifyContext';
+import Layout from '../../components/Layout';
+import ThemedText from '../../components/ThemedText';
+import formatPrice from '../../utils/formatPrice';
+import ProductCounter from '../../components/ProductCounter';
+import { useShopifyFunctions } from '../../components/context/ShopifyContext';
 
 const LineItem = ({
   lineItem,
