@@ -13,6 +13,7 @@ const LineItem = ({
   lineItem,
   decreaseProductAmount,
   increaseProductAmount,
+  removeItem,
 }) => {
   const { quantity, title, variant, id } = lineItem;
   const { src: imageSrc, altText } = variant.image;
@@ -31,6 +32,7 @@ const LineItem = ({
         py={0}
         bg="white"
         m={2}
+        onClick={() => removeItem(id)}
       >
         <VisuallyHidden>Cerrar</VisuallyHidden>
         <div aria-hidden style={{ width: 12, height: 12 }}>
@@ -92,7 +94,7 @@ const CheckoutButton = styled(Button)(({ theme }) => ({
 }));
 
 function CartPageContent() {
-  const { checkout, updateItem } = useShopifyFunctions();
+  const { checkout, updateItem, removeItem } = useShopifyFunctions();
   const { subtotalPrice, webUrl } = checkout;
 
   const displaySubtotalPrice = formatPrice(Number(subtotalPrice));
@@ -127,6 +129,7 @@ function CartPageContent() {
               lineItem={lineItem}
               decreaseProductAmount={decreaseProductAmount}
               increaseProductAmount={increaseProductAmount}
+              removeItem={removeItem}
             />
           ))}
       </Box>
