@@ -3,13 +3,14 @@ import { Flex, Box, Button } from 'rebass';
 import ReactMarkdown from 'react-markdown/with-html';
 import styled from 'styled-components';
 import GatsbyImage from 'gatsby-image';
-import { graphql } from 'gatsby';
+import { graphql, navigate } from 'gatsby';
 
 import Layout from '../components/Layout';
 import formatPrice from '../utils/formatPrice';
 import ThemedText from '../components/ThemedText';
 import { mediaQueries } from '../utils/theme';
 import ProductCounter from '../components/ProductCounter';
+import { useShopifyFunctions } from '../components/context/ShopifyContext';
 
 const DescriptionBox = styled(ThemedText)(({ theme }) => ({
   lineHeight: theme.lineHeights[1],
@@ -152,6 +153,18 @@ function useCurrentImageContext() {
 
 function ProductPage({ data }) {
   const [currentAmount, setCurrentAmount] = useState(1);
+  const { addItem } = useShopifyFunctions();
+  const {
+    product: { title, descriptionHtml, images, variants },
+  } = data;
+
+  // Todo: Allow selection of variant
+  const { shopifyId } = variants[0];
+
+  async function addToCartHandler() {
+    await addItem({ variantId: shopifyId, quantity: currentAmount });
+    navigate('/cart');
+  }
 
   function increaseAmount() {
     setCurrentAmount(a => a + 1);
@@ -161,83 +174,86 @@ function ProductPage({ data }) {
     setCurrentAmount(a => (a <= 1 ? 1 : a - 1));
   }
 
-  const {
-    product: { title, descriptionHtml, images, variants },
-  } = data;
-
   const displayPrice = formatPrice(variants[0].price);
 
   return (
-    <Layout>
-      <CurrentImageContextProvider>
-        <Flex
-          flexDirection={['column', null, 'row']}
-          pt={3}
-          px={4}
-          mx="auto"
-          style={{ maxWidth: 1300 }}
+    <CurrentImageContextProvider>
+      <Flex
+        flexDirection={['column', null, 'row']}
+        pt={3}
+        px={4}
+        mx="auto"
+        style={{ maxWidth: 1300 }}
+      >
+        <Box
+          width={[1, null, 1 / 5]}
+          py={2}
+          px={[2, null, 0]}
+          order={[2, null, 1]}
         >
-          <Box
-            width={[1, null, 1 / 5]}
-            py={2}
-            px={[2, null, 0]}
-            order={[2, null, 1]}
-          >
-            <ProductGalleryThumbnails images={images} />
-          </Box>
-          <Box
-            width={[1, null, 2 / 5]}
-            ml="auto"
-            py={2}
-            px={[2, null, 3]}
-            data-product-image-container
-            order={[1, null, 2]}
-          >
-            <ProductGalleryMainImage images={images} />
-          </Box>
-          <Flex
-            flexDirection="column"
-            width={[1, null, 2 / 5]}
-            px={2}
-            data-product-info
-            order={3}
-          >
-            <ThemedText fontWeight="bold" fontSize={4} as="h1" data-title-box>
-              {title}
+          <ProductGalleryThumbnails images={images} />
+        </Box>
+        <Box
+          width={[1, null, 2 / 5]}
+          ml="auto"
+          py={2}
+          px={[2, null, 3]}
+          data-product-image-container
+          order={[1, null, 2]}
+        >
+          <ProductGalleryMainImage images={images} />
+        </Box>
+        <Flex
+          flexDirection="column"
+          width={[1, null, 2 / 5]}
+          px={2}
+          data-product-info
+          order={3}
+        >
+          <ThemedText fontWeight="bold" fontSize={4} as="h1" data-title-box>
+            {title}
+          </ThemedText>
+          <ThemedText pt={2}>
+            Precio:{' '}
+            <ThemedText as="span" color="primary" fontSize={3} pt={2}>
+              {displayPrice}
             </ThemedText>
-            <ThemedText pt={2}>
-              Precio:{' '}
-              <ThemedText as="span" color="primary" fontSize={3} pt={2}>
-                {displayPrice}
-              </ThemedText>
-            </ThemedText>
+          </ThemedText>
 
-            <Flex py={3}>
-              <Box width={0.4} mr="auto">
-                <ProductCounter
-                  decreaseAmount={decreaseAmount}
-                  increaseAmount={increaseAmount}
-                  currentAmount={currentAmount}
-                />
-              </Box>
-              <Button width={0.5} ml="auto" variant="highlight">
-                Agregar a carrito
-              </Button>
-            </Flex>
-            <DescriptionBox
-              pt={3}
-              source={descriptionHtml}
-              escapeHtml={false}
-              data-description-box
-            />
+          <Flex py={3}>
+            <Box width={0.4} mr="auto">
+              <ProductCounter
+                decreaseAmount={decreaseAmount}
+                increaseAmount={increaseAmount}
+                currentAmount={currentAmount}
+              />
+            </Box>
+            <Button
+              width={0.5}
+              ml="auto"
+              variant="highlight"
+              onClick={addToCartHandler}
+            >
+              Agregar a carrito
+            </Button>
           </Flex>
+          <DescriptionBox
+            pt={3}
+            source={descriptionHtml}
+            escapeHtml={false}
+            data-description-box
+          />
         </Flex>
-      </CurrentImageContextProvider>
-    </Layout>
+      </Flex>
+    </CurrentImageContextProvider>
   );
 }
 
-export default ProductPage;
+export default props => (
+  <Layout>
+    <ProductPage {...props} />
+  </Layout>
+);
 
 export const productQuery = graphql`
   query SingleProductQuery {
@@ -259,6 +275,7 @@ export const productQuery = graphql`
         }
       }
       variants {
+        shopifyId
         price
       }
     }

@@ -52,7 +52,7 @@ const IndividualProduct = ({ product }) => {
   );
 };
 
-function catalog(props) {
+function CatalogPage(props) {
   const products = props.data.allShopifyProduct.nodes;
 
   return (
@@ -66,7 +66,7 @@ function catalog(props) {
   );
 }
 
-export default catalog;
+export default CatalogPage;
 
 export const catalogQuery = graphql`
   query CatalogQuery {
