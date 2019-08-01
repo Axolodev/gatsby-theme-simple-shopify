@@ -8,3 +8,5 @@ public/
 .cache
 .cache/
 yarn.lock
+.env.*
+.env*
