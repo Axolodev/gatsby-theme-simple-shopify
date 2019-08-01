@@ -79,6 +79,8 @@ const useShopifyFunctions = () => {
   }
 
   useEffect(() => {
+    if (!client || !client.checkout) return;
+
     async function createNewCheckout() {
       const checkout = await client.checkout.create();
       setShopifyCheckoutId(checkout.id);
@@ -100,7 +102,7 @@ const useShopifyFunctions = () => {
     }
 
     checkCartExistance();
-  }, [shopifyCheckoutId, setShopifyCheckoutId, client.checkout]);
+  }, [shopifyCheckoutId, setShopifyCheckoutId, client]);
 
   return {
     addItem,
