@@ -3,5 +3,6 @@
   "cartCheckoutButton": "Checkout",
   "cartHeader": "Cart",
   "cartItemPriceLabel": "Price:",
-  "cartItemAriaRemoveFromCart": "Remove item from cart"
+  "cartItemAriaRemoveFromCart": "Remove item from cart",
+  "pageTitle": "Cart"
 }

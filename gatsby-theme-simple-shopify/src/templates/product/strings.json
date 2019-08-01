@@ -1,4 +1,5 @@
 {
   "productAddToCartButton": "Add to cart",
-  "productPriceLabel": "Price:"
+  "productPriceLabel": "Price:",
+  "pageTitleTemplate": "%s"
 }

@@ -3,14 +3,14 @@ import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import Layout from '../../components/Layout';
 import CatalogPage from './CatalogPage';
+import strings from './strings.json';
+
+const { pageTitle } = strings;
 
 export default props => {
-  const {
-    pageContext: { title },
-  } = props;
   return (
     <Layout>
-      <Helmet title={title} />
+      <Helmet title={pageTitle} />
       <CatalogPage {...props} />
     </Layout>
   );

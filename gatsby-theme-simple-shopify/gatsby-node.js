@@ -27,7 +27,6 @@ exports.onCreateNode = ({ node, actions }, options) => {
 
 exports.createPages = async ({ graphql, actions }, options) => {
   const { createPage } = actions;
-  const { cartPageTitle = 'Cart', catalogPageTitle = 'Catalog' } = options;
 
   let {
     cartPagePath = 'cart',
@@ -45,17 +44,11 @@ exports.createPages = async ({ graphql, actions }, options) => {
   createPage({
     path: finalCartPagePath,
     component: cartTemplate,
-    context: {
-      title: cartPageTitle,
-    },
   });
 
   createPage({
     path: finalCatalogPagePath,
     component: catalogTemplate,
-    context: {
-      title: catalogPageTitle,
-    },
   });
 
   const result = await graphql(`

@@ -3,12 +3,15 @@ import { Helmet } from 'react-helmet';
 import { graphql } from 'gatsby';
 import ProductPage from './ProductPage';
 import Layout from '../../components/Layout';
+import strings from './strings.json';
+
+const { pageTitleTemplate } = strings;
 
 export default props => {
   const { title } = props.data.product;
   return (
     <Layout>
-      <Helmet title={title} />
+      <Helmet title={title} titleTemplate={pageTitleTemplate} />
       <ProductPage {...props} />
     </Layout>
   );
