@@ -12,7 +12,7 @@ It is designed to add a simple Shopify Store to any existing Gatsby website.
   - [Changing the default strings](#changing-the-default-strings)
   - [Plugin options](#plugin-options)
     - [Modifying the currency locales](#modifying-the-currency-locales)
-- [Improvements](#improvements)
+- [Additional notes](#additional-notes)
 
 ## Installation
 
@@ -121,7 +121,7 @@ look and feel or even change the language for the whole store.
 {
   // Both of these values should be included in your process.env as explained
   // in the Installation section, as the theme uses them to access your store.
-  // You'll probably be using them as following:
+  // You'll probably be using them as follows:
   shopName: process.env.GATSBY_SHOP_NAME,
   accessToken: process.env.GATSBY_SHOPIFY_ACCESS_TOKEN,
 
@@ -138,9 +138,7 @@ The default currency and locales are both set in the [config.json](https://githu
 
 Multiple Locales are not currently supported.
 
-## Improvements
+## Additional notes
 
-As this theme is still in an early phase, there's a lot that hasn't been done:
-
-- **You cannot use product variants for your shopify products.** This is a
+**You cannot use product variants for your shopify products.** This is a
 feature which will be added in a future build.

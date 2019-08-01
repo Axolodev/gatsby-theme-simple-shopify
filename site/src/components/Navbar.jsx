@@ -22,13 +22,26 @@ function Navbar() {
           Home
         </Text>
         <Text
+          as="a"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/RobRuizR/gatsby-theme-simple-shopify"
+          fontFamily="sans"
+          color="white"
+          fontSize={3}
+          style={{ textDecoration: 'none' }}
+          ml="auto"
+        >
+          Docs
+        </Text>
+        <Text
           as={GatsbyLink}
           to="/store/catalog"
           fontFamily="sans"
           color="white"
           fontSize={3}
           style={{ textDecoration: 'none' }}
-          ml="auto"
+          ml={3}
         >
           Catalog
         </Text>

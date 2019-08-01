@@ -16,30 +16,49 @@ function Home() {
           color="black"
           lineHeight={1}
         >
-          Hey, there's nothing here!
-        </Text>
-        <Text as="p" fontFamily="sans" py={3} color="black" lineHeight={1}>
-          This is just a demo page for the gatsby-theme-simple-shopify.
+          Gatsby Theme Simple Shopify
         </Text>
         <Text
           as="p"
           fontFamily="sans"
-          py={3}
+          pb={1}
+          pt={3}
           color="black"
           lineHeight={1}
-          fontSize={1}
         >
-          Psst, how about checking out the{' '}
+          This is a demo site for the gatsby-theme-simple-shopify Gatsby Theme.
+          It was created for the{' '}
           <Text
-            as={GatsbyLink}
-            lineHeight="inherit"
+            as="a"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://themejam.gatsbyjs.org/"
             color="darkHighlight"
-            fontFamily="inherit"
-            to={'/store/catalog'}
           >
-            catalog
+            Gatsby Theme Jam 2019
           </Text>
-          ?
+        </Text>
+        <Text as="p" py={1} fontFamily="sans" color="black" lineHeight={1}>
+          You can check the{' '}
+          <Text
+            as="a"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/RobRuizR/gatsby-theme-simple-shopify"
+            color="darkHighlight"
+          >
+            official docs
+          </Text>{' '}
+          for more information on how to use it, along with the code for this
+          site.
+        </Text>
+
+        <Text as="p" py={1} fontFamily="sans" color="black" lineHeight={1}>
+          Check out the{' '}
+          <Text as={GatsbyLink} to="/store/catalog" color="darkHighlight">
+            catalog
+          </Text>{' '}
+          to find out how it works!
         </Text>
       </Box>
     </SiteLayout>

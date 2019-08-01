@@ -21,7 +21,7 @@ function SiteLayout(props) {
             as="main"
             flex="1"
             width={1}
-            style={{ maxWidth: 1300 }}
+            style={{ maxWidth: 1300, height: '100%' }}
             mx="auto"
           >
             {props.children}
