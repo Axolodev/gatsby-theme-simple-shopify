@@ -5,7 +5,7 @@ import strings from './strings.json';
 
 import ThemedText from '../../components/ThemedText';
 import formatPrice from '../../utils/formatPrice';
-import { useShopifyFunctions } from '../../components/ShopifyContext';
+import useShopifyFunctions from '../../hooks/useShopifyFunctions';
 import LineItem from './LineItem';
 
 const { cartSubtotalLabel, cartCheckoutButton, cartHeader } = strings;

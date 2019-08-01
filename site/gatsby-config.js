@@ -1,10 +1,13 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
 module.exports = {
   plugins: [
     {
       resolve: 'gatsby-theme-simple-shopify',
       options: {
-        shopName: 'test-store-octatum',
-        accessToken: '00fda704f631a8a2df2c7621bb1bde8c',
+        shopName: process.env.GATSBY_SHOP_NAME,
+        accessToken: process.env.GATSBY_SHOPIFY_ACCESS_TOKEN,
         basePath: '/store',
       },
     },

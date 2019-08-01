@@ -6,7 +6,7 @@ import strings from './strings.json';
 import formatPrice from '../../utils/formatPrice';
 import ThemedText from '../../components/ThemedText';
 import ProductCounter from '../../components/ProductCounter';
-import { useShopifyFunctions } from '../../components/ShopifyContext';
+import useShopifyFunctions from '../../hooks/useShopifyFunctions';
 import ProductGalleryCurrentImage from './ProductGalleryCurrentImage';
 import ProductGalleryThumbnails from './ProductGalleryThumbnails';
 import { CurrentImageContextProvider } from './CurrentImageContext';

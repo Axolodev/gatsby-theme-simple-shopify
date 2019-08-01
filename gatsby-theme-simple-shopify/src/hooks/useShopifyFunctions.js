@@ -29,7 +29,7 @@ function shopifyCheckoutReducer(_, action) {
 }
 
 const useShopifyFunctions = () => {
-  const client = useMemo(() => createShopifyClient());
+  const client = useMemo(() => createShopifyClient(), [createShopifyClient]);
   const [shopifyCheckoutId, setShopifyCheckoutId] = useLocalStorage(
     persistedStateId,
     ''
@@ -111,4 +111,4 @@ const useShopifyFunctions = () => {
   };
 };
 
-export { useShopifyFunctions };
+export default useShopifyFunctions;
