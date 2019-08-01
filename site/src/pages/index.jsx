@@ -26,8 +26,8 @@ function Home() {
           color="black"
           lineHeight={1}
         >
-          This is a demo site for the gatsby-theme-simple-shopify Gatsby Theme.
-          It was created for the{' '}
+          This is a demo site for the gatsby-theme-simple-shopify Gatsby Theme,
+          which was created for the{' '}
           <Text
             as="a"
             target="_blank"
