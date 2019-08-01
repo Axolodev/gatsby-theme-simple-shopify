@@ -37,6 +37,8 @@ function CartPage() {
     }
   }
 
+  const buttonEnabled = checkout.loaded && checkout.lineItems.length > 0;
+
   return (
     <Box px={[3, 4]} py={3} mx="auto" style={{ maxWidth: 1300 }}>
       <ThemedText as="h1" fontSize={[3, 4, 5]}>
@@ -67,11 +69,14 @@ function CartPage() {
       <Flex width={1} justifyContent="flex-end">
         <CheckoutButton
           as={'a'}
-          href={webUrl}
+          href={buttonEnabled && webUrl}
           mt={3}
           variant="highlight"
           px={4}
           py={3}
+          style={{
+            opacity: buttonEnabled ? 1 : 0.7,
+          }}
         >
           {cartCheckoutButton}
         </CheckoutButton>

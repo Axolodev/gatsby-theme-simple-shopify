@@ -53,6 +53,9 @@ const theme = {
       '&:focus': {
         backgroundColor: colors.darkPrimary,
       },
+      '&:disabled': {
+        opacity: 0.7,
+      },
     },
     highlight: {
       fontWeight: 'bold',
@@ -61,6 +64,9 @@ const theme = {
       backgroundColor: colors.highlight,
       '&:focus': {
         backgroundColor: colors.darkHighlight,
+      },
+      '&:disabled': {
+        opacity: 0.7,
       },
     },
   },

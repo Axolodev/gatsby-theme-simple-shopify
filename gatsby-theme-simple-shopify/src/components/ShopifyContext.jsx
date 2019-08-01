@@ -29,7 +29,7 @@ function shopifyCheckoutReducer(_, action) {
     case shopifyActions.setLoading:
       return { loaded: false };
     case shopifyActions.setCheckout:
-      const { lineItems, subtotalPrice, webUrl } = action.payload;
+      const { lineItems = [], subtotalPrice = 0, webUrl = '' } = action.payload;
       return { lineItems, subtotalPrice, webUrl, loaded: true };
     default:
       throw new Error(`Action of type ${action.type} does not exist.`);
@@ -83,13 +83,21 @@ const useShopifyFunctions = () => {
   }
 
   useEffect(() => {
+    async function createNewCheckout() {
+      const checkout = await client.checkout.create();
+      setShopifyCheckoutId(checkout.id);
+      return checkout;
+    }
+
     async function checkCartExistance() {
       let ch = null;
       if (shopifyCheckoutId === '') {
-        ch = await client.checkout.create();
-        setShopifyCheckoutId(ch.id);
+        ch = createNewCheckout();
       } else {
         ch = await client.checkout.fetch(shopifyCheckoutId);
+        if (ch === null) {
+          ch = createNewCheckout();
+        }
       }
 
       dispatch({ type: shopifyActions.setCheckout, payload: ch });
