@@ -1,7 +1,10 @@
 import React from 'react';
 import { Flex, Button } from 'rebass';
 import styled from 'styled-components';
-import ThemedText from './ThemedText';
+import strings from './strings.json';
+import ThemedText from '../ThemedText';
+
+const { ariaIncreaseButton, ariaDecreaseButton } = strings;
 
 const FlexBg = styled(Flex)(({ theme }) => ({
   ...theme.buttons.default,
@@ -13,7 +16,7 @@ function ProductCounter({ currentAmount, increaseAmount, decreaseAmount }) {
     <FlexBg bg="lightPrimary">
       <Button
         onClick={decreaseAmount}
-        aria-label={`Disminuir cantidad a ${currentAmount - 1}`}
+        aria-label={ariaDecreaseButton}
         variant="default"
         width={1 / 3}
         px={1}
@@ -25,7 +28,7 @@ function ProductCounter({ currentAmount, increaseAmount, decreaseAmount }) {
       </ThemedText>
       <Button
         onClick={increaseAmount}
-        aria-label={`Aumentar cantidad a ${currentAmount + 1}`}
+        aria-label={ariaIncreaseButton}
         variant="default"
         width={1 / 3}
         px={1}

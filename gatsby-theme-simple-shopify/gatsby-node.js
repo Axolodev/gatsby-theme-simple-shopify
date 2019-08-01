@@ -1,28 +1,86 @@
 const path = require('path');
 const productTemplate = path.resolve('src/templates/product/index.jsx');
+const cartTemplate = path.resolve('src/templates/cart/index.jsx');
+const catalogTemplate = path.resolve('src/templates/catalog/index.jsx');
 
-exports.createPages = ({ graphql, actions }) => {
+function removeTrailingLeadingSlashes(string) {
+  return string.replace(/^\/*|\/*$/g, '');
+}
+
+exports.onCreateNode = ({ node, actions }, options) => {
+  if (node.internal.type === `ShopifyProduct`) {
+    let { basePath = '', productPageBasePath = 'product' } = options;
+    const { createNodeField } = actions;
+    basePath = removeTrailingLeadingSlashes(basePath);
+    productPageBasePath = removeTrailingLeadingSlashes(productPageBasePath);
+
+    // Todo: Improve the way this is done. Maybe using the config.json file.
+    createNodeField({
+      node,
+      name: 'shopifyThemePath',
+      value: `${basePath && `/${basePath}`}/${productPageBasePath}/${
+        node.handle
+      }`,
+    });
+  }
+};
+
+exports.createPages = async ({ graphql, actions }, options) => {
   const { createPage } = actions;
-  return new Promise(resolve => {
-    graphql(`
-      {
-        products: allShopifyProduct {
-          nodes {
-            handle
+  const { cartPageTitle = 'Cart', catalogPageTitle = 'Catalog' } = options;
+
+  let {
+    cartPagePath = 'cart',
+    catalogPagePath = 'catalog',
+    basePath = '',
+  } = options;
+
+  basePath = removeTrailingLeadingSlashes(basePath);
+  cartPagePath = removeTrailingLeadingSlashes(cartPagePath);
+  catalogPagePath = removeTrailingLeadingSlashes(catalogPagePath);
+  const finalCartPagePath = `${basePath && `/${basePath}`}/${cartPagePath}`;
+  const finalCatalogPagePath = `${basePath &&
+    `/${basePath}`}/${catalogPagePath}`;
+
+  createPage({
+    path: finalCartPagePath,
+    component: cartTemplate,
+    context: {
+      title: cartPageTitle,
+    },
+  });
+
+  createPage({
+    path: finalCatalogPagePath,
+    component: catalogTemplate,
+    context: {
+      title: catalogPageTitle,
+    },
+  });
+
+  const result = await graphql(`
+    {
+      products: allShopifyProduct {
+        nodes {
+          handle
+          fields {
+            shopifyThemePath
           }
         }
       }
-    `).then(result => {
-      result.data.products.nodes.forEach(({ handle }) => {
-        createPage({
-          path: `/product/${handle}`,
-          component: productTemplate,
-          context: {
-            handle,
-          },
-        });
-      });
-      resolve();
+    }
+  `);
+  result.data.products.nodes.forEach(({ handle, fields }) => {
+    const { shopifyThemePath } = fields;
+    createPage({
+      path: shopifyThemePath,
+      component: productTemplate,
+      context: {
+        handle,
+
+        // Todo: Find a better way to do this.
+        cartUrl: finalCartPagePath,
+      },
     });
   });
 };

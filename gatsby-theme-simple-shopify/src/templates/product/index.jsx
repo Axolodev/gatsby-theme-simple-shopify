@@ -1,13 +1,18 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { graphql } from 'gatsby';
 import ProductPage from './ProductPage';
 import Layout from '../../components/Layout';
 
-export default props => (
-  <Layout>
-    <ProductPage {...props} />
-  </Layout>
-);
+export default props => {
+  const { title } = props.data.product;
+  return (
+    <Layout>
+      <Helmet title={title} />
+      <ProductPage {...props} />
+    </Layout>
+  );
+};
 
 export const productQuery = graphql`
   query SingleProductQuery($handle: String!) {

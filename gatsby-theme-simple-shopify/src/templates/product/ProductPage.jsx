@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Flex, Box, Button } from 'rebass';
 import { navigate } from 'gatsby';
 
+import strings from './strings.json';
 import formatPrice from '../../utils/formatPrice';
 import ThemedText from '../../components/ThemedText';
 import ProductCounter from '../../components/ProductCounter';
@@ -11,19 +12,22 @@ import ProductGalleryThumbnails from './ProductGalleryThumbnails';
 import { CurrentImageContextProvider } from './CurrentImageContext';
 import DescriptionBox from './DescriptionBox';
 
-function ProductPage({ data }) {
+const { productAddToCartButton, productPriceLabel } = strings;
+
+function ProductPage({ data, pageContext }) {
   const [currentAmount, setCurrentAmount] = useState(1);
   const { addItem } = useShopifyFunctions();
   const {
     product: { title, descriptionHtml, images, variants },
   } = data;
+  const { cartUrl } = pageContext;
 
-  // Todo: Allow selection of variant
+  // Todo: Allow selection of variants
   const { shopifyId } = variants[0];
 
   async function addToCartHandler() {
     await addItem({ variantId: shopifyId, quantity: currentAmount });
-    navigate('/cart');
+    navigate(cartUrl);
   }
 
   function increaseAmount() {
@@ -74,7 +78,7 @@ function ProductPage({ data }) {
             {title}
           </ThemedText>
           <ThemedText pt={2}>
-            Precio:{' '}
+            {productPriceLabel}{' '}
             <ThemedText as="span" color="primary" fontSize={3} pt={2}>
               {displayPrice}
             </ThemedText>
@@ -94,7 +98,7 @@ function ProductPage({ data }) {
               variant="highlight"
               onClick={addToCartHandler}
             >
-              Agregar a carrito
+              {productAddToCartButton}
             </Button>
           </Flex>
           <DescriptionBox
