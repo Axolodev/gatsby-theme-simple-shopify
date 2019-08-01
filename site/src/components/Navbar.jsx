@@ -4,7 +4,7 @@ import GatsbyLink from 'gatsby-link';
 
 function Navbar() {
   return (
-    <Box py={3} width={1} bg="primary">
+    <Box py={3} width={1} bg="primary" as="nav">
       <Flex
         style={{ maxWidth: 1300 }}
         justifyContent="flex-end"

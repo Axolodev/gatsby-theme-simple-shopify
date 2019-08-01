@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import { Flex, Box } from 'rebass';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -11,19 +12,26 @@ function SiteLayout(props) {
   return (
     <ShopifyClientProvider>
       <ThemeProvider theme={theme}>
-        <Flex flexDirection="column" style={{ minHeight: '100vh' }}>
-          <Navbar />
-          <Box
-            flex="1"
-            width={1}
-            style={{ maxWidth: 1300 }}
-            mx="auto"
-            px={[3, null, 4]}
-          >
-            {props.children}
-          </Box>
-          <Footer />
-        </Flex>
+        <React.Fragment>
+          <Helmet>
+            <html lang="en" />
+          </Helmet>
+
+          <Flex flexDirection="column" style={{ minHeight: '100vh' }}>
+            <Navbar />
+            <Box
+              as="main"
+              flex="1"
+              width={1}
+              style={{ maxWidth: 1300 }}
+              mx="auto"
+              px={[3, null, 4]}
+            >
+              {props.children}
+            </Box>
+            <Footer />
+          </Flex>
+        </React.Fragment>
       </ThemeProvider>
     </ShopifyClientProvider>
   );

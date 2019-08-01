@@ -33,7 +33,7 @@ function Home() {
           <Text
             as={GatsbyLink}
             lineHeight="inherit"
-            color="highlight"
+            color="darkHighlight"
             fontFamily="inherit"
             to={'/store/catalog'}
           >
