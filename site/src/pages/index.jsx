@@ -8,7 +8,7 @@ function Home() {
   return (
     <SiteLayout>
       <Helmet title="Home" />
-      <Box py={3}>
+      <Box py={3} px={[3, null, 4]}>
         <Text
           as="h1"
           fontSize={4}

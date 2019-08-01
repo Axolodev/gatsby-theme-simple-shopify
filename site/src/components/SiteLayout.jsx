@@ -23,7 +23,6 @@ function SiteLayout(props) {
             width={1}
             style={{ maxWidth: 1300 }}
             mx="auto"
-            px={[3, null, 4]}
           >
             {props.children}
           </Box>
