@@ -1,12 +1,14 @@
 {
   "name": "gatsby-theme-simple-shopify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [
     "gatsby",
     "gatsby-theme",
     "gatsby-plugin"
   ],
   "author": "Roberto Ruiz <rroberto.rruiz@gmail.com>",
+  "main": "index.js",
+  "repository": "robruizr/gatsby-theme-simple-shopify",
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
