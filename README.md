@@ -1,21 +1,18 @@
-# `gatsby-theme-simple-shopify`
-
 Gatsby Theme Simple Shopify is gatsby theme created for the Gatsby themejam 2019.
 It is designed to add a simple Shopify Store to any existing Gatsby website.
 
 [Demo](https://gatsby-theme-simple-shopify.netlify.com/)
 
-- [`gatsby-theme-simple-shopify`](#gatsby-theme-simple-shopify)
-  - [Installation](#installation)
-  - [Usage](#usage)
-    - [Theming your... err... theme](#theming-your-err-theme)
-    - [Adding navigation to the default pages (e.g. a Navbar)](#adding-navigation-to-the-default-pages-eg-a-navbar)
-      - [Option 1. Overriding the Layout.jsx component](#option-1-overriding-the-layoutjsx-component)
-      - [Option 2. Overriding the page templates](#option-2-overriding-the-page-templates)
-    - [Changing the default strings](#changing-the-default-strings)
-    - [Plugin options](#plugin-options)
-      - [Modifying the currency locales](#modifying-the-currency-locales)
-  - [Improvements](#improvements)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Theming your... err... theme](#theming-your-err-theme)
+  - [Adding navigation to the default pages (e.g. a Navbar)](#adding-navigation-to-the-default-pages-eg-a-navbar)
+    - [Option 1. Overriding the Layout.jsx component](#option-1-overriding-the-layoutjsx-component)
+    - [Option 2. Overriding the page templates](#option-2-overriding-the-page-templates)
+  - [Changing the default strings](#changing-the-default-strings)
+  - [Plugin options](#plugin-options)
+    - [Modifying the currency locales](#modifying-the-currency-locales)
+- [Improvements](#improvements)
 
 ## Installation
 
