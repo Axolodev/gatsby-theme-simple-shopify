@@ -1,7 +1,7 @@
 const path = require('path');
-const productTemplate = path.resolve('src/templates/product/index.jsx');
-const cartTemplate = path.resolve('src/templates/cart/index.jsx');
-const catalogTemplate = path.resolve('src/templates/catalog/index.jsx');
+const productTemplate = require.resolve('./src/templates/product/index.jsx');
+const cartTemplate = require.resolve('./src/templates/cart/index.jsx');
+const catalogTemplate = require.resolve('./src/templates/catalog/index.jsx');
 
 function removeTrailingLeadingSlashes(string) {
   return string.replace(/^\/*|\/*$/g, '');

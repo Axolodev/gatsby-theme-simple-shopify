@@ -1,9 +1,8 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import shopify from 'shopify-buy';
-import persistedStateCreator from 'use-persisted-state';
+import useLocalStorage from 'react-use/lib/useLocalStorage';
 
 const persistedStateId = 'shopifyCheckout';
-const useShopifyCheckout = persistedStateCreator(persistedStateId);
 
 const client = shopify.buildClient({
   domain: `${process.env.GATSBY_SHOP_NAME ||
@@ -39,7 +38,10 @@ function shopifyCheckoutReducer(_, action) {
 
 const useShopifyFunctions = () => {
   const client = useShopifyClient();
-  const [shopifyCheckoutId, setShopifyCheckoutId] = useShopifyCheckout('');
+  const [shopifyCheckoutId, setShopifyCheckoutId] = useLocalStorage(
+    persistedStateId,
+    ''
+  );
   const [checkout, dispatch] = useReducer(shopifyCheckoutReducer, {
     loaded: false,
     subtotalPrice: 0,

@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from '../theme';
 import './reset.css';
-import { ShopifyClientProvider } from './context/ShopifyContext';
+import { ShopifyClientProvider } from './ShopifyContext';
 
 function Layout({ children }) {
   return (
