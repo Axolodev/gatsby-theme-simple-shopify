@@ -1,3 +1,4 @@
 [build]
+  base = "site/"
+  command = "build"
   publish = "site/public/"
-  command = "yarn workspace site build"
