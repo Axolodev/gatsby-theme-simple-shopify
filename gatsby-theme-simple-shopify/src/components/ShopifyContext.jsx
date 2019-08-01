@@ -50,20 +50,21 @@ const useShopifyFunctions = () => {
   });
 
   async function addItem({ variantId, quantity }) {
-    const ch = await client.checkout.addLineItems(shopifyCheckoutId, [
-      { variantId, quantity },
-    ]);
+    const temporalCheckout = await client.checkout.addLineItems(
+      shopifyCheckoutId,
+      [{ variantId, quantity }]
+    );
 
-    dispatch({ type: shopifyActions.setCheckout, payload: ch });
-    return ch;
+    dispatch({ type: shopifyActions.setCheckout, payload: temporalCheckout });
   }
 
   async function removeItem(variantId) {
-    const ch = await client.checkout.removeLineItems(shopifyCheckoutId, [
-      variantId,
-    ]);
+    const temporalCheckout = await client.checkout.removeLineItems(
+      shopifyCheckoutId,
+      [variantId]
+    );
 
-    dispatch({ type: shopifyActions.setCheckout, payload: ch });
+    dispatch({ type: shopifyActions.setCheckout, payload: temporalCheckout });
   }
 
   function resetCart() {
@@ -72,14 +73,17 @@ const useShopifyFunctions = () => {
   }
 
   async function updateItem({ id, quantity }) {
-    const ch = await client.checkout.updateLineItems(shopifyCheckoutId, [
-      {
-        id,
-        quantity,
-      },
-    ]);
+    const temporalCheckout = await client.checkout.updateLineItems(
+      shopifyCheckoutId,
+      [
+        {
+          id,
+          quantity,
+        },
+      ]
+    );
 
-    dispatch({ type: shopifyActions.setCheckout, payload: ch });
+    dispatch({ type: shopifyActions.setCheckout, payload: temporalCheckout });
   }
 
   useEffect(() => {
@@ -90,17 +94,17 @@ const useShopifyFunctions = () => {
     }
 
     async function checkCartExistance() {
-      let ch = null;
+      let temporalCheckout = null;
       if (shopifyCheckoutId === '') {
-        ch = createNewCheckout();
+        temporalCheckout = createNewCheckout();
       } else {
-        ch = await client.checkout.fetch(shopifyCheckoutId);
-        if (ch === null) {
-          ch = createNewCheckout();
+        temporalCheckout = await client.checkout.fetch(shopifyCheckoutId);
+        if (temporalCheckout === null) {
+          temporalCheckout = createNewCheckout();
         }
       }
 
-      dispatch({ type: shopifyActions.setCheckout, payload: ch });
+      dispatch({ type: shopifyActions.setCheckout, payload: temporalCheckout });
     }
 
     checkCartExistance();
