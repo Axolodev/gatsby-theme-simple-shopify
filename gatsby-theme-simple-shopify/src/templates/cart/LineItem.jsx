@@ -71,7 +71,7 @@ const LineItem = ({
             pt={2}
             fontSize={[2]}
             lineHeight={1}
-            style={{ opacity: 0.6 }}
+            style={{ opacity: 0.7 }}
           >
             {cartItemPriceLabel} {displayPrice}
           </ThemedText>
